@@ -38,7 +38,10 @@ public class Processor implements Runnable {
 
     private void printOrders() {
         // print each order for each of the statuses
-
+        System.out.println("CURRENT WORK ORDERS IN PROCESSOR:");
+        for(WorkOrder order : orders) {
+            System.out.println(order);
+        }
     }
 
     private void moveIt() {
@@ -55,10 +58,13 @@ public class Processor implements Runnable {
                 try {
                     ObjectMapper mapper = new ObjectMapper();
                     WorkOrder order = mapper.readValue(f, WorkOrder.class);
-                    f.delete();
-                    orders.add(order);
+
                     System.out.println("NEW ORDER FOUND!");
                     System.out.println(order);
+
+                    // delete the file once it has been added to our orders
+                    f.delete();
+                    orders.add(order);
                 } catch (FileNotFoundException ex) {
                     System.out.println("Could not find file *" + f + "*");
                     ex.printStackTrace();
