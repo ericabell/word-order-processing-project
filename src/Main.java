@@ -1,6 +1,9 @@
 public class Main {
 
-    public static void main(String[] args) {
-	// write your code here
+    // kick off the creator and processor in separate threads
+
+    public static void main(String args[]) {
+        (new Thread(new Creator())).start();
+        (new Thread(new Processor())).start();
     }
 }
