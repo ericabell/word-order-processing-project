@@ -17,6 +17,13 @@ public class WorkOrder {
         this.id = id;
     }
 
+    public WorkOrder(int id, String description, String senderName, Status status) {
+        this.id = id;
+        this.description = description;
+        this.senderName = senderName;
+        this.status = status;
+    }
+
     public int getId() {
         return id;
     }
@@ -63,5 +70,14 @@ public class WorkOrder {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+    }
+
+    @Override
+    public String toString() {
+        return "WorkOrder{" +
+                "description='" + description + '\'' +
+                ", senderName='" + senderName + '\'' +
+                ", status=" + status +
+                '}';
     }
 }
