@@ -55,6 +55,7 @@ public class Processor implements Runnable {
                 try {
                     ObjectMapper mapper = new ObjectMapper();
                     WorkOrder order = mapper.readValue(f, WorkOrder.class);
+                    f.delete();
                     orders.add(order);
                     System.out.println("NEW ORDER FOUND!");
                     System.out.println(order);

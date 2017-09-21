@@ -10,6 +10,9 @@ public class WorkOrder {
     String senderName;
     Status status;
 
+    public WorkOrder() {
+    }
+
     public WorkOrder(int id, String description, String senderName) {
         this.description = description;
         this.senderName = senderName;
