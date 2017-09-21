@@ -24,8 +24,7 @@ public class Processor implements Runnable {
 
 
             // loop through all the orders and increment their status,
-            // be sure to check when they are done
-            // moveIt();
+            moveIt();
 
             // delay of 5 seconds betweeen processing
             try {
@@ -46,12 +45,28 @@ public class Processor implements Runnable {
 
     private void moveIt() {
         // move work orders in map from one state to another
+        // INITIAL -> ASSIGNED -> IN_PROGRESS -> DONE
+
+        // loop through the orders
+        for( WorkOrder order : orders ) {
+            if( order.getStatus().equals(Status.IN_PROGRESS) ) {
+                order.setStatus(Status.DONE);
+            }
+            if( order.getStatus().equals(Status.ASSIGNED) ) {
+                order.setStatus(Status.IN_PROGRESS);
+            }
+            if( order.getStatus().equals(Status.INITIAL) ) {
+                order.setStatus(Status.ASSIGNED);
+            }
+
+
+        }
     }
 
     private void readIt() {
         File file = new File(".");
 
-        // read the json files into WorkOrders and put in map
+        // read the json files into WorkOrders and put in map, then delete the json file
         for (File f : file.listFiles()) {
             if (f.getName().endsWith(".json")) {
                 // Now you have a File object named "f".
@@ -74,7 +89,6 @@ public class Processor implements Runnable {
             }
         }
 
-        // delete the json files after they have been read in
     }
 
     public void run() {
